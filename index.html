@@ -7,7 +7,47 @@
 <title>忘れん打刻</title>
 <style>
 :root{--bg:#f7f3ea;--card:#fffaf0;--ink:#2b2b2b;--muted:#6b6b6b;--line:#e0d8c8;--warn:#b00020;--warnbg:#ffe3e7;--accent:#765533}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;padding:18px 14px 32px}main{max-width:760px;margin:0 auto}h1{text-align:center;font-size:30px;margin:8px 0 4px}.sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 4px 14px rgba(0,0,0,.07);margin-bottom:14px}.buttons{display:grid;grid-template-columns:1fr 1fr;gap:18px;justify-items:center}.circle{width:132px;height:132px;border-radius:50%;border:0;font-size:26px;font-weight:800;color:#222;box-shadow:0 7px 14px rgba(0,0,0,.18);touch-action:manipulation}.circle:active{transform:translateY(2px);box-shadow:0 3px 8px rgba(0,0,0,.18)}.nyuten{background:#ffd84d}.shukkin{background:#58c873}.taikin{background:#ff6b6b}.taiten{background:#343434;color:#fff}.status{display:none;text-align:center;border-radius:12px;padding:11px 10px;font-weight:800;margin-bottom:12px}.status.warn{display:block;background:var(--warnbg);color:var(--warn)}.status.ok{display:block;background:#e7f7e8;color:#1f6b2d}.today{font-size:14px;line-height:1.8}.today b{font-size:16px}.tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.toolbtn{border:1px solid var(--line);background:white;border-radius:10px;padding:10px 12px;font-size:14px}.tablewrap{overflow-x:auto;background:white;border-radius:14px;border:1px solid var(--line)}table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}th,td{border-bottom:1px solid #eee;padding:10px 8px;text-align:center;white-space:nowrap}th{background:#f1eadc;font-weight:800}tr:last-child td{border-bottom:0}td.holiday{font-weight:800;color:#555;background:#f8f8f8}.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#222;color:white;padding:10px 14px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:10}.toast.show{opacity:1}.danger{color:#a00000}@media(max-width:380px){.circle{width:118px;height:118px;font-size:24px}.buttons{gap:14px}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;padding:18px 14px 32px}
+main{max-width:760px;margin:0 auto}
+h1{text-align:center;font-size:30px;margin:8px 0 4px}
+.sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 4px 14px rgba(0,0,0,.07);margin-bottom:14px}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:18px;justify-items:center}
+.circle{width:132px;height:132px;border-radius:50%;border:0;font-weight:800;color:#222;box-shadow:0 7px 14px rgba(0,0,0,.18);touch-action:manipulation;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.circle:active{transform:translateY(2px);box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.circle.recorded{filter:brightness(.72)}
+.btn-label{font-size:26px;line-height:1}
+.btn-time{font-size:20px;line-height:1;min-height:20px}
+.nyuten{background:#ffd84d}
+.shukkin{background:#58c873}
+.taikin{background:#ff6b6b}
+.taiten{background:#343434;color:#fff}
+.status{display:none;text-align:center;border-radius:12px;padding:11px 10px;font-weight:800;margin-bottom:12px}
+.status.warn{display:block;background:var(--warnbg);color:var(--warn)}
+.status.ok{display:block;background:#e7f7e8;color:#1f6b2d}
+.tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.toolbtn{border:1px solid var(--line);background:white;border-radius:10px;padding:10px 12px;font-size:14px}
+.tablewrap{overflow-x:hidden;background:white;border-radius:14px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;table-layout:fixed;font-size:13px}
+th,td{border-bottom:1px solid #eee;padding:8px 2px;text-align:center;white-space:nowrap;overflow:hidden}
+th:first-child,td:first-child{width:24%}
+th:not(:first-child),td:not(:first-child){width:19%}
+th{background:#f1eadc;font-weight:800}
+tr:last-child td{border-bottom:0}
+td.holiday{font-weight:800;color:#555;background:#f8f8f8}
+.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#222;color:white;padding:10px 14px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:10}
+.toast.show{opacity:1}
+.danger{color:#a00000}
+@media(max-width:380px){
+  .circle{width:118px;height:118px}
+  .buttons{gap:14px}
+  .btn-label{font-size:24px}
+  .btn-time{font-size:18px}
+  table{font-size:12px}
+  th,td{padding:7px 1px}
+}
 </style>
 </head>
 <body>
@@ -15,15 +55,28 @@
 <h1>忘れん打刻</h1>
 <div class="sub">入店・出勤・退勤・退店をワンタップ記録</div>
 <div id="status" class="status"></div>
+
 <section class="panel">
   <div class="buttons">
-    <button class="circle nyuten" onclick="record('入店')">入店</button>
-    <button class="circle taikin" onclick="record('退勤')">退勤</button>
-    <button class="circle shukkin" onclick="record('出勤')">出勤</button>
-    <button class="circle taiten" onclick="record('退店')">退店</button>
+    <button class="circle nyuten" data-col="入店" onclick="record('入店')">
+      <span class="btn-label">入店</span>
+      <span class="btn-time"></span>
+    </button>
+    <button class="circle taikin" data-col="退勤" onclick="record('退勤')">
+      <span class="btn-label">退勤</span>
+      <span class="btn-time"></span>
+    </button>
+    <button class="circle shukkin" data-col="出勤" onclick="record('出勤')">
+      <span class="btn-label">出勤</span>
+      <span class="btn-time"></span>
+    </button>
+    <button class="circle taiten" data-col="退店" onclick="record('退店')">
+      <span class="btn-label">退店</span>
+      <span class="btn-time"></span>
+    </button>
   </div>
 </section>
-<section class="panel today" id="todayBox"></section>
+
 <section class="panel">
   <div class="tools">
     <button class="toolbtn" onclick="clearToday()">今日を削除</button>
@@ -33,6 +86,7 @@
   </div>
   <div class="note">休みの日は、次に開いた時に前日までを自動で「休み」として追加します。データはこの端末・このブラウザ内に保存されます。</div>
 </section>
+
 <div class="tablewrap">
 <table>
 <thead><tr><th>日付</th><th>入店</th><th>出勤</th><th>退勤</th><th>退店</th></tr></thead>
@@ -40,10 +94,14 @@
 </table>
 </div>
 </main>
+
 <div id="toast" class="toast"></div>
+
 <script>
 const KEY="wasuren_dakoku_records_v3";
 const COLS=["入店","出勤","退勤","退店"];
+let midnightTimer=null;
+
 function pad(n){return String(n).padStart(2,"0")}
 function dateKey(d=new Date()){return `${String(d.getFullYear()).slice(2)}/${pad(d.getMonth()+1)}/${pad(d.getDate())}`}
 function timeNow(){const d=new Date();return `${d.getHours()}:${pad(d.getMinutes())}`}
@@ -52,78 +110,228 @@ function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){
 function save(data){localStorage.setItem(KEY,JSON.stringify(data))}
 function emptyRow(date){return {date,入店:"",出勤:"",退勤:"",退店:""}}
 function isEmpty(row){return COLS.every(c=>!row[c])}
-function isHoliday(row){return row.入店==="休み" && !row.出勤 && !row.退勤 && !row.退店}
+function isHoliday(row){return row.入店==="休み"&&!row.出勤&&!row.退勤&&!row.退店}
+
 function normalize(data){
   const map=new Map();
-  data.forEach(r=>{if(r&&r.date){map.set(r.date,{date:r.date,入店:r.入店||"",出勤:r.出勤||"",退勤:r.退勤||"",退店:r.退店||""})}});
+  data.forEach(r=>{
+    if(r&&r.date){
+      map.set(r.date,{
+        date:r.date,
+        入店:r.入店||"",
+        出勤:r.出勤||"",
+        退勤:r.退勤||"",
+        退店:r.退店||""
+      });
+    }
+  });
+
   const keys=[...map.keys()].sort();
   if(keys.length){
-    let d=parseDate(keys[0]); d.setHours(0,0,0,0);
-    const end=new Date(); end.setHours(0,0,0,0);
-    while(d<end){const k=dateKey(d); if(!map.has(k)) map.set(k,{date:k,入店:"休み",出勤:"",退勤:"",退店:""}); d.setDate(d.getDate()+1)}
+    let d=parseDate(keys[0]);
+    d.setHours(0,0,0,0);
+    const end=new Date();
+    end.setHours(0,0,0,0);
+
+    while(d<end){
+      const k=dateKey(d);
+      if(!map.has(k)){
+        map.set(k,{date:k,入店:"休み",出勤:"",退勤:"",退店:""});
+      }
+      d.setDate(d.getDate()+1);
+    }
   }
+
   const arr=[...map.values()].filter(r=>!isEmpty(r));
   arr.sort((a,b)=>a.date.localeCompare(b.date));
   return arr;
 }
-function getToday(data){const t=dateKey();let row=data.find(r=>r.date===t);if(!row){row=emptyRow(t);data.push(row)}return row}
+
+function getToday(data){
+  const t=dateKey();
+  let row=data.find(r=>r.date===t);
+  if(!row){
+    row=emptyRow(t);
+    data.push(row);
+  }
+  return row;
+}
+
 function record(col){
   let data=normalize(load());
   const row=getToday(data);
-  if(isHoliday(row)){row.入店=""}
-  if(row[col]){if(!confirm(`${col}はすでに「${row[col]}」です。上書きしますか？`))return}
+
+  if(isHoliday(row)){
+    row.入店="";
+  }
+
+  if(row[col]){
+    if(!confirm(`${col}の記録を取り消しますか？`)){
+      return;
+    }
+    row[col]="";
+    if(isEmpty(row)){
+      data=data.filter(r=>r.date!==row.date);
+    }
+    save(normalize(data));
+    render();
+    toast(`${col}を取り消しました`);
+    return;
+  }
+
   row[col]=timeNow();
   save(normalize(data));
   render();
   toast(`${col}を記録しました`);
 }
+
 function clearToday(){
   if(!confirm("今日の記録を削除しますか？"))return;
   const t=dateKey();
   const data=load().filter(r=>r.date!==t);
-  save(normalize(data)); render(); toast("今日の記録を削除しました");
+  save(normalize(data));
+  render();
+  toast("今日の記録を削除しました");
 }
+
 function editToday(){
-  let data=normalize(load()); const row=getToday(data);
+  let data=normalize(load());
+  const row=getToday(data);
+
   for(const c of COLS){
-    const v=prompt(`${c}を修正（空欄にすると削除）`, row[c]==="休み"?"":row[c]);
-    if(v===null)return; row[c]=v.trim();
+    const v=prompt(`${c}を修正（空欄にすると削除）`,row[c]==="休み"?"":row[c]);
+    if(v===null)return;
+    row[c]=v.trim();
   }
-  if(isEmpty(row)){data=data.filter(r=>r.date!==row.date)}
-  save(normalize(data)); render(); toast("修正しました");
+
+  if(isEmpty(row)){
+    data=data.filter(r=>r.date!==row.date);
+  }
+
+  save(normalize(data));
+  render();
+  toast("修正しました");
 }
+
 function copyCSV(){
   const data=normalize(load());
   const lines=["日付,入店,出勤,退勤,退店",...data.map(r=>`${r.date},${r.入店||""},${r.出勤||""},${r.退勤||""},${r.退店||""}`)];
-  navigator.clipboard.writeText(lines.join("\n")).then(()=>toast("CSVをコピーしました"),()=>alert(lines.join("\n")));
+  navigator.clipboard.writeText(lines.join("\n")).then(
+    ()=>toast("CSVをコピーしました"),
+    ()=>alert(lines.join("\n"))
+  );
 }
+
 function resetAll(){
   if(!confirm("全記録を削除します。元に戻せません。よろしいですか？"))return;
-  localStorage.removeItem(KEY); render(); toast("全削除しました");
+  localStorage.removeItem(KEY);
+  render();
+  toast("全削除しました");
 }
+
 function statusFor(today){
-  const box=document.getElementById("status"); box.className="status"; box.textContent="";
-  if(!today){return}
-  const any=COLS.some(c=>today[c]); const all=COLS.every(c=>today[c]);
-  if(any&&!all){box.textContent="⚠️ 今日の勤務記録が未完了です"; box.classList.add("warn")}
-  if(all&&!isHoliday(today)){box.textContent="✅ 今日の勤務記録は完了しています"; box.classList.add("ok")}
+  const box=document.getElementById("status");
+  box.className="status";
+  box.textContent="";
+
+  if(!today)return;
+
+  const any=COLS.some(c=>today[c]);
+  const all=COLS.every(c=>today[c]);
+
+  if(any&&!all){
+    box.textContent="⚠️ 今日の勤務記録が未完了です";
+    box.classList.add("warn");
+  }
+
+  if(all&&!isHoliday(today)){
+    box.textContent="✅ 今日の勤務記録は完了しています";
+    box.classList.add("ok");
+  }
 }
+
+function updateButtons(today){
+  document.querySelectorAll(".circle[data-col]").forEach(btn=>{
+    const col=btn.dataset.col;
+    const value=today?.[col]||"";
+    const timeEl=btn.querySelector(".btn-time");
+
+    if(value&&value!=="休み"){
+      timeEl.textContent=value;
+      btn.classList.add("recorded");
+    }else{
+      timeEl.textContent="";
+      btn.classList.remove("recorded");
+    }
+  });
+}
+
 function render(){
-  const data=normalize(load()); save(data);
-  const t=dateKey(); const today=data.find(r=>r.date===t);
+  const data=normalize(load());
+  save(data);
+
+  const t=dateKey();
+  const today=data.find(r=>r.date===t);
+
   statusFor(today);
-  const todayBox=document.getElementById("todayBox");
-  todayBox.innerHTML=`<b>今日：${t}</b><br>入店：${today?.入店||"未記録"}　出勤：${today?.出勤||"未記録"}<br>退勤：${today?.退勤||"未記録"}　退店：${today?.退店||"未記録"}`;
-  const tbody=document.getElementById("tbody"); tbody.innerHTML="";
+  updateButtons(today);
+
+  const tbody=document.getElementById("tbody");
+  tbody.innerHTML="";
+
   [...data].sort((a,b)=>b.date.localeCompare(a.date)).forEach(r=>{
     const tr=document.createElement("tr");
-    if(isHoliday(r)){tr.innerHTML=`<td>${r.date}</td><td class="holiday">休み</td><td></td><td></td><td></td>`}
-    else{tr.innerHTML=`<td>${r.date}</td><td>${r.入店||""}</td><td>${r.出勤||""}</td><td>${r.退勤||""}</td><td>${r.退店||""}</td>`}
+
+    if(isHoliday(r)){
+      tr.innerHTML=`<td>${r.date}</td><td class="holiday">休み</td><td></td><td></td><td></td>`;
+    }else{
+      tr.innerHTML=`<td>${r.date}</td><td>${r.入店||""}</td><td>${r.出勤||""}</td><td>${r.退勤||""}</td><td>${r.退店||""}</td>`;
+    }
+
     tbody.appendChild(tr);
   });
 }
-function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800)}
+
+function scheduleMidnightReset(){
+  if(midnightTimer){
+    clearTimeout(midnightTimer);
+  }
+
+  const now=new Date();
+  const nextMidnight=new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()+1,
+    0,0,0,0
+  );
+
+  midnightTimer=setTimeout(()=>{
+    render();
+    scheduleMidnightReset();
+  },nextMidnight.getTime()-now.getTime());
+}
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1800);
+}
+
+document.addEventListener("visibilitychange",()=>{
+  if(!document.hidden){
+    render();
+    scheduleMidnightReset();
+  }
+});
+
+window.addEventListener("focus",()=>{
+  render();
+  scheduleMidnightReset();
+});
+
 render();
+scheduleMidnightReset();
 </script>
 </body>
 </html>
